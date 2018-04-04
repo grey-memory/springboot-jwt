@@ -1,4 +1,4 @@
-package com.akera.model.bean;
+package com.akera.model.po;
 
 import java.io.Serializable;
 import java.util.Date;
