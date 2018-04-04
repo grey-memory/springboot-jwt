@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="application-dev.properties"/>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!--<property name="defaultNamespace" value="com.example.demo"/>-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="${spring.default.namespace}.utils.MyMapper"/>
+        </plugin>
+<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<!-- 通用mapper插件 -->
+     <!--    <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+              此处的 MyMapper注意一定不能被扫描到
+            <property name="mappers" value="com.blueocean.common.plugin.MybatisMapper"/>
+        </plugin> -->
+		
+		<commentGenerator>
+			<!-- 如果你只生成一次代码，以后再不用工具生成可以关闭注释，如果会重复生成就要把注释开关打开。我的配置参数是打开时间注释 -->
+			<property name="suppressDate" value="false" />
+			<!-- 是否去除自动生成的注释 这个最好设置成false 否则容易出现重复代码 -->
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="${spring.default.namespace}.model.bean" targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="${spring.default.namespace}.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <table tableName="user_info">
+			<property name="constructorBased" value="false" />
+		</table>
+    </context>
+</generatorConfiguration>
